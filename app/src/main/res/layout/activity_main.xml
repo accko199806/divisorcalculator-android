@@ -1,0 +1,296 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f2f2f2">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@color/teal"
+            app:theme="@style/menutheme">
+
+            <TextView
+                android:id="@+id/toolbar_title"
+                style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/bmjua"
+                android:text="@string/app_name"
+                android:textColor="@android:color/white" />
+
+        </android.support.v7.widget.Toolbar>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/teal"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/tabHome"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:paddingBottom="12dp"
+                android:paddingTop="12dp"
+                android:src="@mipmap/ic_home" />
+
+            <ImageButton
+                android:id="@+id/tabStar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:paddingBottom="12dp"
+                android:paddingTop="12dp"
+                android:src="@mipmap/ic_star" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/calculatorLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:id="@+id/searchLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:background="@android:color/white">
+
+                    <TextView
+                        android:id="@+id/searchResult"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:fontFamily="@font/bmjua"
+                        android:paddingLeft="16dp"
+                        android:text=""
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textStyle="bold" />
+
+                    <ImageButton
+                        android:id="@+id/searchBack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:src="@mipmap/ic_arrow_back_black_24dp" />
+
+                    <EditText
+                        android:id="@+id/searchBar"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_toRightOf="@id/searchBack"
+                        android:background="@null"
+                        android:fontFamily="@font/bmjua"
+                        android:hint="write number"
+                        android:imeOptions="actionSearch"
+                        android:inputType="number"
+                        android:maxLength="19"
+                        android:paddingRight="16dp"
+                        android:singleLine="true"
+                        android:textColor="#232323">
+
+                        <requestFocus />
+                    </EditText>
+
+                    <ImageButton
+                        android:id="@+id/searchClear"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:src="@mipmap/ic_clear_black_24dp" />
+
+                    <ImageButton
+                        android:id="@+id/searchButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="16dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:src="@mipmap/ic_search_black_24dp" />
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/searchLayoutShadow"
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:layout_below="@+id/searchLayout"
+                    android:background="@drawable/background_shadow" />
+
+                <LinearLayout
+                    android:id="@+id/tutorialLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:src="@drawable/emoticon_ryan" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/bmjua"
+                        android:gravity="center"
+                        android:text="약수를 계산해보세요!"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="#232323" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/result"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/searchLayout"
+                    android:fontFamily="@font/bmjua"
+                    android:lineSpacingExtra="2.5dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:scrollbars="vertical"
+                    android:textColor="#232323"
+                    android:textSize="18sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/settingsLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/appInfoLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:orientation="vertical">
+
+                    <net.accko.divisorcalculator.util.PreferenceView
+                        android:id="@+id/preferenceVersion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        app:name="앱 버전"
+                        app:symbol="@drawable/ic_question_black_24dp"
+                        app:text="1.0" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_marginLeft="72dp"
+                        android:background="#e5e5e5" />
+
+                    <net.accko.divisorcalculator.util.PreferenceView
+                        android:id="@+id/preferenceInfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        app:name="앱 정보"
+                        app:symbol="@drawable/ic_info_black_24dp"
+                        app:text="" />
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/versionLayoutShadow"
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:layout_below="@+id/appInfoLayout"
+                    android:background="@drawable/background_shadow" />
+
+                <LinearLayout
+                    android:id="@+id/contactLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/versionLayoutShadow"
+                    android:layout_marginTop="8dp"
+                    android:background="@android:color/white"
+                    android:orientation="vertical">
+
+                    <net.accko.divisorcalculator.util.PreferenceView
+                        android:id="@+id/preferenceContact"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        app:name="문의하기"
+                        app:symbol="@drawable/ic_call_black_24dp"
+                        app:text="" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_marginLeft="72dp"
+                        android:background="#e5e5e5" />
+
+                    <net.accko.divisorcalculator.util.PreferenceView
+                        android:id="@+id/preferenceOsl"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        app:name="오픈소스라이센스"
+                        app:symbol="@drawable/ic_code_black_24dp"
+                        app:text="" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_marginLeft="72dp"
+                        android:background="#e5e5e5" />
+
+                    <net.accko.divisorcalculator.util.PreferenceView
+                        android:id="@+id/preferenceDev"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        app:name="만든사람"
+                        app:symbol="@drawable/ic_person_black_24dp"
+                        app:text="" />
+
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/versionLayoutShadow2"
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:layout_below="@+id/contactLayout"
+                    android:background="@drawable/background_shadow" />
+
+            </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>

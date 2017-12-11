@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Divisor Calculator</string>
+
+    <string name="result"></string>
+
+    <string name="osl">Open source license</string>
+    <string name="banner_ad_unit_id">ca-app-pub-8184195003057423/2039076197</string>
+
+</resources>

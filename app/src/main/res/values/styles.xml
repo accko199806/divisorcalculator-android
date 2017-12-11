@@ -1,0 +1,17 @@
+<resources>
+
+    <style name="main" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/teal</item>
+        <item name="android:colorPrimaryDark">@color/teal_dark</item>
+        <item name="colorAccent">@color/teal_dark</item>
+        <item name="android:textColor">@color/gray_text_color</item>
+    </style>
+
+    <style name="menutheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:textColorPrimary">@color/abc_primary_text_material_dark</item>
+        <item name="actionMenuTextColor">@color/abc_primary_text_material_dark</item>
+        <item name="android:textColorSecondary">@color/abc_secondary_text_material_dark</item>
+        <item name="android:textColor">@color/gray_text_color</item>
+    </style>
+
+</resources>

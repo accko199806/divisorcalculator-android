@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="historyChoice">
+        <item>계산</item>
+        <item>기록 삭제</item>
+    </string-array>
+
+    <declare-styleable name="PreferenceView">
+        <attr name="symbol" format="reference|integer" />
+        <attr name="name" format="reference|string" />
+        <attr name="text" format="reference|string" />
+    </declare-styleable>
+
+</resources>
