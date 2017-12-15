@@ -1,27 +1,21 @@
 package net.accko.divisorcalculator.ui;
 
-import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.method.ScrollingMovementMethod;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.webkit.WebView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -155,11 +149,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return true;
             }
         });
-
-        String str = "오픈소스 라이센스";
-        tv2 = new TextView(this);
-        tv2.setText(str);
-
     }
 
     void findTab() {
@@ -303,21 +292,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:me@accko.net")));
                 break;
             case R.id.preferenceOsl:
-                LayoutInflater inflater = getLayoutInflater();
-                final View dialogView = inflater.inflate(R.layout.item_dialog_license, null);
-                WebView webview = dialogView.findViewById(R.id.webview);
-                webview.getSettings().setJavaScriptEnabled(true);
-                webview.loadUrl("file:///android_asset/license.html");
-                AlertDialog.Builder buider = new AlertDialog.Builder(this);
-                buider.setCustomTitle(tv2);
-                buider.setView(dialogView);
-
-                buider.setPositiveButton("닫기", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                });
-                buider.show();
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/accko199806/divisorcalculator-android")));
                 break;
             case R.id.preferenceDev:
                 break;

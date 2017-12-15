@@ -261,9 +261,9 @@
                         android:layout_height="wrap_content"
                         android:clickable="true"
                         android:foreground="?android:attr/selectableItemBackground"
-                        app:name="오픈소스라이센스"
+                        app:name="오픈소스 프로젝트"
                         app:symbol="@drawable/ic_code_black_24dp"
-                        app:text="" />
+                        app:text="약수계산기는 오픈소스 프로젝트입니다." />
 
                     <View
                         android:layout_width="match_parent"
