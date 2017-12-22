@@ -2,10 +2,20 @@
 <resources>
 
     <string name="app_name">약수계산기</string>
+    <string name="str_cal">약수를 계산해보세요!</string>
+
+    <string name="app_ver">앱 버전</string>
+    <string name="app_info">앱 정보</string>
+
+    <string name="contact">문의하기</string>
+
+    <string name="developer">만든사람</string>
 
     <string name="result">개</string>
 
-    <string name="osl">오픈소스라이센스</string>
+    <string name="osp">오픈소스 프로젝트</string>
+    <string name="osp_text">약수계산기는 오픈소스 프로젝트입니다.</string>
+
     <string name="banner_ad_unit_id">ca-app-pub-8184195003057423/2039076197</string>
 
 </resources>

@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView tv2 = null;
     LinearLayout tutorialLayout;
     RelativeLayout calculatorLayout, settingsLayout;
-    PreferenceView preferenceVersion, preferenceInfo, preferenceContact, preferenceOsl, preferenceDev;
+    PreferenceView preferenceVersion, preferenceInfo, preferenceContact, preferenceOsp, preferenceDev;
 
     int isPosition = 1;
 
@@ -189,8 +189,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         preferenceInfo.setOnClickListener(this);
         preferenceContact = findViewById(R.id.preferenceContact);
         preferenceContact.setOnClickListener(this);
-        preferenceOsl = findViewById(R.id.preferenceOsl);
-        preferenceOsl.setOnClickListener(this);
+        preferenceOsp = findViewById(R.id.preferenceOsp);
+        preferenceOsp.setOnClickListener(this);
         preferenceDev = findViewById(R.id.preferenceDev);
         preferenceDev.setOnClickListener(this);
     }
@@ -291,7 +291,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.preferenceContact:
                 startActivity(new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:me@accko.net")));
                 break;
-            case R.id.preferenceOsl:
+            case R.id.preferenceOsp:
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/accko199806/divisorcalculator-android")));
                 break;
             case R.id.preferenceDev:

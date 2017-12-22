@@ -2,10 +2,20 @@
 <resources>
 
     <string name="app_name">Divisor Calculator</string>
+    <string name="str_cal">Calculate the divisor!</string>
+
+    <string name="app_ver">Application Version</string>
+    <string name="app_info">Application Information</string>
+
+    <string name="contact">Contact</string>
+
+    <string name="developer">Developer</string>
 
     <string name="result"></string>
 
-    <string name="osl">Open source license</string>
+    <string name="osp">Open Source Project</string>
+    <string name="osp_text">Divisor calculator is an open source project.</string>
+
     <string name="banner_ad_unit_id">ca-app-pub-8184195003057423/2039076197</string>
 
 </resources>
