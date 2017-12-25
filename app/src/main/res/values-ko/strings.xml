@@ -6,16 +6,18 @@
 
     <string name="app_ver">앱 버전</string>
     <string name="app_info">앱 정보</string>
+    <string name="app_info_text">&quot;약수계산기&quot; 애플리케이션 프로젝트는 &quot;akoiapp&quot;의 프로젝트로서 모든 권리를 보유합니다.\n모든 컨텐츠, 기능은 akoiapp의 저작물로 보호받아 무단 배포 및 수정시 법적으로 처벌받을 수 있습니다.\n\nCopyright 2017. akoiapp. 모든 권리 보유.</string>
 
     <string name="contact">문의하기</string>
 
     <string name="developer">만든사람</string>
 
+    <string name="remove_ads">광고 제거</string>
+    <string name="number_ads">광고 참여 횟수 : </string>
+
     <string name="result">개</string>
 
     <string name="osp">오픈소스 프로젝트</string>
     <string name="osp_text">약수계산기는 오픈소스 프로젝트입니다.</string>
-
-    <string name="banner_ad_unit_id">ca-app-pub-8184195003057423/2039076197</string>
 
 </resources>

@@ -66,7 +66,8 @@
             <RelativeLayout
                 android:id="@+id/calculatorLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_above="@+id/adView">
 
                 <RelativeLayout
                     android:id="@+id/searchLayout"
@@ -109,10 +110,7 @@
                         android:maxLength="19"
                         android:paddingRight="16dp"
                         android:singleLine="true"
-                        android:textColor="#232323">
-
-                        <requestFocus />
-                    </EditText>
+                        android:textColor="#232323" />
 
                     <ImageButton
                         android:id="@+id/searchClear"
@@ -182,110 +180,171 @@
             <RelativeLayout
                 android:id="@+id/settingsLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_above="@+id/adLayout">
 
-                <LinearLayout
-                    android:id="@+id/appInfoLayout"
+                <ScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/white"
-                    android:orientation="vertical">
+                    android:layout_height="match_parent">
 
-                    <net.accko.divisorcalculator.util.PreferenceView
-                        android:id="@+id/preferenceVersion"
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:clickable="true"
-                        android:foreground="?android:attr/selectableItemBackground"
-                        app:name="@string/app_ver"
-                        app:symbol="@drawable/ic_question_black_24dp"
-                        app:text="1.0" />
+                        android:layout_height="match_parent">
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"
-                        android:layout_marginLeft="72dp"
-                        android:background="#e5e5e5" />
+                        <LinearLayout
+                            android:id="@+id/appInfoLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/white"
+                            android:orientation="vertical">
 
-                    <net.accko.divisorcalculator.util.PreferenceView
-                        android:id="@+id/preferenceInfo"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:clickable="true"
-                        android:foreground="?android:attr/selectableItemBackground"
-                        app:name="@string/app_info"
-                        app:symbol="@drawable/ic_info_black_24dp"
-                        app:text="" />
-                </LinearLayout>
+                            <net.accko.divisorcalculator.util.PreferenceView
+                                android:id="@+id/preferenceVersion"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:clickable="true"
+                                android:foreground="?android:attr/selectableItemBackground"
+                                app:name="@string/app_ver"
+                                app:symbol="@drawable/ic_question_black_24dp"
+                                app:text="1.0" />
 
-                <View
-                    android:id="@+id/versionLayoutShadow"
-                    android:layout_width="match_parent"
-                    android:layout_height="4dp"
-                    android:layout_below="@+id/appInfoLayout"
-                    android:background="@drawable/background_shadow" />
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0.5dp"
+                                android:layout_marginLeft="72dp"
+                                android:background="#e5e5e5" />
 
-                <LinearLayout
-                    android:id="@+id/contactLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/versionLayoutShadow"
-                    android:layout_marginTop="8dp"
-                    android:background="@android:color/white"
-                    android:orientation="vertical">
+                            <net.accko.divisorcalculator.util.PreferenceView
+                                android:id="@+id/preferenceInfo"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:clickable="true"
+                                android:foreground="?android:attr/selectableItemBackground"
+                                app:name="@string/app_info"
+                                app:symbol="@drawable/ic_info_black_24dp"
+                                app:text="" />
+                        </LinearLayout>
 
-                    <net.accko.divisorcalculator.util.PreferenceView
-                        android:id="@+id/preferenceContact"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:clickable="true"
-                        android:foreground="?android:attr/selectableItemBackground"
-                        app:name="@string/contact"
-                        app:symbol="@drawable/ic_call_black_24dp"
-                        app:text="" />
+                        <View
+                            android:id="@+id/versionLayoutShadow"
+                            android:layout_width="match_parent"
+                            android:layout_height="4dp"
+                            android:layout_below="@+id/appInfoLayout"
+                            android:background="@drawable/background_shadow" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"
-                        android:layout_marginLeft="72dp"
-                        android:background="#e5e5e5" />
+                        <LinearLayout
+                            android:id="@+id/contactLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/versionLayoutShadow"
+                            android:layout_marginTop="8dp"
+                            android:background="@android:color/white"
+                            android:orientation="vertical">
 
-                    <net.accko.divisorcalculator.util.PreferenceView
-                        android:id="@+id/preferenceOsp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:clickable="true"
-                        android:foreground="?android:attr/selectableItemBackground"
-                        app:name="@string/osp"
-                        app:symbol="@drawable/ic_code_black_24dp"
-                        app:text="@string/osp_text" />
+                            <net.accko.divisorcalculator.util.PreferenceView
+                                android:id="@+id/preferenceContact"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:clickable="true"
+                                android:foreground="?android:attr/selectableItemBackground"
+                                app:name="@string/contact"
+                                app:symbol="@drawable/ic_call_black_24dp"
+                                app:text="" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"
-                        android:layout_marginLeft="72dp"
-                        android:background="#e5e5e5" />
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0.5dp"
+                                android:layout_marginLeft="72dp"
+                                android:background="#e5e5e5" />
 
-                    <net.accko.divisorcalculator.util.PreferenceView
-                        android:id="@+id/preferenceDev"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:clickable="true"
-                        android:foreground="?android:attr/selectableItemBackground"
-                        app:name="@string/developer"
-                        app:symbol="@drawable/ic_person_black_24dp"
-                        app:text="" />
+                            <net.accko.divisorcalculator.util.PreferenceView
+                                android:id="@+id/preferenceOsp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:clickable="true"
+                                android:foreground="?android:attr/selectableItemBackground"
+                                app:name="@string/osp"
+                                app:symbol="@drawable/ic_code_black_24dp"
+                                app:text="@string/osp_text" />
 
-                </LinearLayout>
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0.5dp"
+                                android:layout_marginLeft="72dp"
+                                android:background="#e5e5e5" />
 
-                <View
-                    android:id="@+id/versionLayoutShadow2"
-                    android:layout_width="match_parent"
-                    android:layout_height="4dp"
-                    android:layout_below="@+id/contactLayout"
-                    android:background="@drawable/background_shadow" />
+                            <net.accko.divisorcalculator.util.PreferenceView
+                                android:id="@+id/preferenceDev"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:clickable="true"
+                                android:foreground="?android:attr/selectableItemBackground"
+                                app:name="@string/developer"
+                                app:symbol="@drawable/ic_person_black_24dp"
+                                app:text="" />
 
+                        </LinearLayout>
+
+                        <View
+                            android:id="@+id/contactLayoutShadow"
+                            android:layout_width="match_parent"
+                            android:layout_height="4dp"
+                            android:layout_below="@+id/contactLayout"
+                            android:background="@drawable/background_shadow" />
+
+                        <LinearLayout
+                            android:id="@+id/donateLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/contactLayoutShadow"
+                            android:layout_marginTop="8dp"
+                            android:background="@android:color/white"
+                            android:orientation="vertical">
+
+                            <net.accko.divisorcalculator.util.PreferenceView
+                                android:id="@+id/preferenceRemoveAds"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:clickable="true"
+                                android:foreground="?android:attr/selectableItemBackground"
+                                app:name="@string/remove_ads"
+                                app:symbol="@drawable/ic_remove_black_24dp"
+                                app:text="" />
+                        </LinearLayout>
+
+                        <View
+                            android:id="@+id/donateLayoutShadow"
+                            android:layout_width="match_parent"
+                            android:layout_height="4dp"
+                            android:layout_below="@+id/donateLayout"
+                            android:layout_marginBottom="8dp"
+                            android:background="@drawable/background_shadow" />
+
+                    </RelativeLayout>
+                </ScrollView>
             </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/adLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_above="@+id/adView"
+                    android:background="#e5e5e5" />
+
+                <com.google.android.gms.ads.AdView
+                    android:id="@+id/adView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:adSize="SMART_BANNER"
+                    app:adUnitId="ca-app-pub-8184195003057423/2039076197" />
+            </LinearLayout>
         </RelativeLayout>
     </LinearLayout>
 </RelativeLayout>

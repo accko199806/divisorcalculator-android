@@ -6,16 +6,18 @@
 
     <string name="app_ver">Application Version</string>
     <string name="app_info">Application Information</string>
+    <string name="app_info_text">The &quot;Divisor Calculator&quot; application project is a project of &quot;akoiapp&quot; and has all rights.\nAll content and features are protected by the copyrighted work of akoiapp and may be legally punished for unauthorized distribution and modification.\n\nCopyright 2017. akoiapp. All rights reserved.</string>
 
     <string name="contact">Contact</string>
 
     <string name="developer">Developer</string>
 
+    <string name="remove_ads">Remove Ads</string>
+    <string name="number_ads">Number of ads engagement : </string>
+
     <string name="result"></string>
 
     <string name="osp">Open Source Project</string>
     <string name="osp_text">Divisor calculator is an open source project.</string>
-
-    <string name="banner_ad_unit_id">ca-app-pub-8184195003057423/2039076197</string>
 
 </resources>

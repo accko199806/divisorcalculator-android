@@ -1,16 +1,18 @@
 package net.accko.divisorcalculator.ui;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -18,10 +20,16 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
 
 import net.accko.divisorcalculator.R;
 import net.accko.divisorcalculator.util.PreferenceView;
@@ -36,14 +44,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Animation fadein, fadeout;
     TextView toolbarText, searchResult, result;
     TextView tv2 = null;
-    LinearLayout tutorialLayout;
+    LinearLayout tutorialLayout, adLayout;
     RelativeLayout calculatorLayout, settingsLayout;
-    PreferenceView preferenceVersion, preferenceInfo, preferenceContact, preferenceOsp, preferenceDev;
+    PreferenceView preferenceVersion, preferenceInfo, preferenceContact, preferenceOsp, preferenceDev, preferenceRemoveAds;
+    InputMethodManager imm;
 
     int isPosition = 1;
 
     boolean clearTrue = true;
     boolean tutorial = true;
+
+    private AdView mAdView;
+    private InterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,12 +72,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fadein = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in);
         fadeout = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_out); //animation settings
 
+        findAds(); //find ads, show
         findTab(); //find tab, onclick
         findSearchview(); //find searchview, onclick
         findPreference(); //find preference, onclick
         findMainview(); //find mainview, onclick
 
         tabAlpha(255, 100); //tabicon translucent
+
+        imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
 
         searchBar.addTextChangedListener(new TextWatcher() {
             @Override
@@ -103,6 +118,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 switch (actionId) {
                     case EditorInfo.IME_ACTION_SEARCH:
+                        if (mInterstitialAd.isLoaded()) {
+                            mInterstitialAd.show();
+                        } else {
+                            Log.d("TAG", "The interstitial wasn't loaded yet.");
+                        } //Interstitial Ads
+
                         if (searchBar.getText().toString().equals("")) {
                             Toast.makeText(MainActivity.this.getApplicationContext(), "cannot", Toast.LENGTH_SHORT).show(); //if edittext if blank
                         } else if (searchBar.getText().toString().startsWith("0")) {
@@ -151,6 +172,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
+    void findAds(){
+        adLayout = findViewById(R.id.adLayout);
+        mAdView = findViewById(R.id.adView);
+
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-8184195003057423/3560691791");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build()); //InterstitilAd
+
+        MobileAds.initialize(this, "ca-app-pub-8184195003057423/2039076197");
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest); //banner
+    }
+
     void findTab() {
         tabHome = findViewById(R.id.tabHome);
         tabHome.setOnClickListener(this);
@@ -193,6 +227,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         preferenceOsp.setOnClickListener(this);
         preferenceDev = findViewById(R.id.preferenceDev);
         preferenceDev.setOnClickListener(this);
+        preferenceRemoveAds = findViewById(R.id.preferenceRemoveAds);
+        preferenceRemoveAds.setOnClickListener(this);
     }
 
     void searchMode() {
@@ -204,8 +240,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         searchBack.startAnimation(fadein);
         searchBar.setVisibility(View.VISIBLE);
         searchBar.startAnimation(fadein);
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+
+        imm.showSoftInput(searchBar, 0); //keyboard show
 
         if (tutorial == true) {
             tutorialLayout.setVisibility(View.GONE);
@@ -225,8 +261,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         searchButton.startAnimation(fadein);
         searchButton.setVisibility(View.VISIBLE);
         searchButton.startAnimation(fadein);
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(searchBar.getWindowToken(), 0);
+
+        imm.hideSoftInputFromWindow(searchBar.getWindowToken(),0); //keyboard hide
 
         if (tutorial == true) {
             tutorialLayout.setVisibility(View.VISIBLE);
@@ -287,6 +323,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=net.accko.divisorcalculator")));
                 break;
             case R.id.preferenceInfo:
+                LayoutInflater titleInflater = getLayoutInflater();
+                final View viewTitle = titleInflater.inflate(R.layout.dialog_title, null);
+                TextView dialogTitleText = viewTitle.findViewById(R.id.title);
+                dialogTitleText.setText(getString(R.string.app_info));
+
+                LayoutInflater infoInflater = getLayoutInflater();
+                final View viewInfo = infoInflater.inflate(R.layout.dialog_appinfo, null);
+
+                AlertDialog.Builder infoBuider = new AlertDialog.Builder(this);
+                infoBuider.setCustomTitle(viewTitle);
+                infoBuider.setView(viewInfo);
+                AlertDialog infoDialog = infoBuider.create();
+                infoDialog.show();
                 break;
             case R.id.preferenceContact:
                 startActivity(new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:me@accko.net")));
@@ -295,6 +344,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/accko199806/divisorcalculator-android")));
                 break;
             case R.id.preferenceDev:
+                LayoutInflater titleInflater2 = getLayoutInflater();
+                final View viewTitle2 = titleInflater2.inflate(R.layout.dialog_title, null);
+                ImageView titleImage = viewTitle2.findViewById(R.id.titleImage);
+                titleImage.setImageResource(R.drawable.ic_remove_black_24dp);
+                TextView dialogTitleText2 = viewTitle2.findViewById(R.id.title);
+                dialogTitleText2.setText(getString(R.string.remove_ads));
+
+                LayoutInflater devInflater = getLayoutInflater();
+                final View viewDev = devInflater.inflate(R.layout.dialog_removeads, null);
+
+                AlertDialog.Builder deleteAdsBuider = new AlertDialog.Builder(this);
+                deleteAdsBuider.setCustomTitle(viewTitle2);
+                deleteAdsBuider.setView(viewDev);
+                AlertDialog deleteAdsDialog = deleteAdsBuider.create();
+                deleteAdsDialog.show();
+                break;
+            case R.id.preferenceRemoveAds:
+                LayoutInflater titleInflater3 = getLayoutInflater();
+                final View viewTitle3 = titleInflater3.inflate(R.layout.dialog_title, null);
+                ImageView titleImage2 = viewTitle3.findViewById(R.id.titleImage);
+                titleImage2.setImageResource(R.drawable.ic_remove_black_24dp);
+                TextView dialogTitleText3 = viewTitle3.findViewById(R.id.title);
+                dialogTitleText3.setText(getString(R.string.remove_ads));
+
+                LayoutInflater removeAdsInflater = getLayoutInflater();
+                final View viewRemoveAds = removeAdsInflater.inflate(R.layout.dialog_removeads, null);
+
+                AlertDialog.Builder removeAdsBuider = new AlertDialog.Builder(this);
+                removeAdsBuider.setCustomTitle(viewTitle3);
+                removeAdsBuider.setView(viewRemoveAds);
+                AlertDialog removeAdsDialog = removeAdsBuider.create();
+                removeAdsDialog.show();
                 break;
         }
     }
