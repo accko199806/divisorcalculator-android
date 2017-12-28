@@ -9,14 +9,23 @@
     android:paddingTop="16dp">
 
     <TextView
+        android:id="@+id/adsText"
+        android:layout_width="match_parent"
+        android:fontFamily="@font/bmjua"
+        android:layout_height="wrap_content"
+        android:text="@string/remove_ads_text" />
+
+    <TextView
         android:id="@+id/numberAds"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/adsText"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/bmjua"
         android:gravity="center"
         android:text="@string/number_ads"
         android:textColor="@color/gray_text_color"
-        android:textSize="18sp" />
+        android:textSize="24sp" />
 
     <Button
         android:id="@+id/takeAds"
@@ -24,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/numberAds"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/bmjua"
         android:text="@string/remove_ads" />
 

@@ -157,6 +157,7 @@
                         android:fontFamily="@font/bmjua"
                         android:gravity="center"
                         android:text="@string/str_cal"
+                        android:textSize="24sp"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="#232323" />
 
@@ -206,7 +207,7 @@
                                 android:foreground="?android:attr/selectableItemBackground"
                                 app:name="@string/app_ver"
                                 app:symbol="@drawable/ic_question_black_24dp"
-                                app:text="1.0" />
+                                app:text="4.0b" />
 
                             <View
                                 android:layout_width="match_parent"

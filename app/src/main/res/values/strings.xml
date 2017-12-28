@@ -2,10 +2,10 @@
 <resources>
 
     <string name="app_name">Divisor Calculator</string>
-    <string name="str_cal">Calculate the divisor!</string>
+    <string name="str_cal">Click on the calculation icon above\nand start calculating the divisor!</string>
 
-    <string name="app_ver">Application Version</string>
-    <string name="app_info">Application Information</string>
+    <string name="app_ver">App Version</string>
+    <string name="app_info">App Information</string>
     <string name="app_info_text">The &quot;Divisor Calculator&quot; application project is a project of &quot;akoiapp&quot; and has all rights.\nAll content and features are protected by the copyrighted work of akoiapp and may be legally punished for unauthorized distribution and modification.\n\nCopyright 2017 akoiapp. All rights reserved.</string>
 
     <string name="contact">Contact</string>
@@ -22,8 +22,8 @@
     <string name="github"><u>Github</u></string>
 
     <string name="remove_ads">Remove Ads</string>
+    <string name="remove_ads_text">Watch your video ads to get rid of your ads!</string>
     <string name="number_ads">Number of ads engagement : </string>
-    <string name="removed_text">It will be reflected after restarting the application!</string>
 
     <string name="ads_participation">Thank you for your participation.</string>
     <string name="ads_load_fail">Failed to load ads.</string>

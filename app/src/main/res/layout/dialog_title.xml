@@ -31,5 +31,4 @@
             android:text="dialogTitle"
             android:textSize="24sp" />
     </RelativeLayout>
-
 </RelativeLayout>

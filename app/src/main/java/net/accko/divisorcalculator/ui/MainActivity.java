@@ -11,7 +11,6 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.method.ScrollingMovementMethod;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,8 +37,6 @@ import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 
 import net.accko.divisorcalculator.R;
 import net.accko.divisorcalculator.util.PreferenceView;
-
-import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -488,10 +485,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void onRewarded(RewardItem reward) { // Reward the user.
         if (divisor_sp.getInt("adsNumberSp", 0) == 0) {
-            Toast.makeText(getApplicationContext(), getString(R.string.removed_text), Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(getApplicationContext(), getString(R.string.ads_participation), Toast.LENGTH_LONG).show();
+            adLayout.setVisibility(View.GONE);
         }
+
+        Toast.makeText(getApplicationContext(), getString(R.string.ads_participation), Toast.LENGTH_LONG).show();
         adsNumber++;
         divisor_sp_ed.putInt("adsNumberSp", adsNumber);
         divisor_sp_ed.apply();
