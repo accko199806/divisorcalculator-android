@@ -188,10 +188,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
-    private void loadRewardedVideoAd() {
-        mRewardedVideoAd.loadAd("ca-app-pub-8184195003057423/9628631175", new AdRequest.Builder().build());
-    }
-
     void findAds() {
         adLayout = findViewById(R.id.adLayout);
         if (divisor_sp.getInt("adsNumberSp", 0) != 0) {
@@ -208,8 +204,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mAdView.loadAd(adRequest); //banner
 
         mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
-        mRewardedVideoAd.setRewardedVideoAdListener(this); //reward
-        loadRewardedVideoAd();
+        mRewardedVideoAd.setRewardedVideoAdListener(this);
+        mRewardedVideoAd.loadAd("ca-app-pub-8184195003057423/9628631175", new AdRequest.Builder().build()); //reward
     }
 
     void findTab() {

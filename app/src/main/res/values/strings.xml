@@ -11,10 +11,10 @@
     <string name="contact">Contact</string>
 
     <string name="developer">Developer</string>
-    <string name="developer_text_age">안녕하세요! 저는 00년생 고등학생이며, akoiapp에서 안드로이드 개발을 하는 accko라고 합니다.</string>
-    <string name="developer_text_age_after">안녕하세요! 저는 00년생 고등학생이며, akoiapp에서 안드로이드 개발을 하는 accko라고 합니다.</string>
-    <string name="developer_text_dev">2014년부터 지금까지 약수계산기를 만들고, 업데이트 하고 있습니다.</string>
-    <string name="developer_text_more">더 자세한 내용은 아래의 사이트들을 참고해주세요!</string>
+    <string name="developer_text_age">Hello! I&apos;m high school student in south korea and develop android apps.</string>
+    <string name="developer_text_age_after">Hello! I&apos;m acckolee and develop android apps in akoiapp.</string>
+    <string name="developer_text_dev">I will create an application that thinks necessary in our daily life.</string>
+    <string name="developer_text_more">For details, please visit the following site!</string>
 
     <string name="blog"><u>Blog</u></string>
     <string name="googleplus"><u>Google+</u></string>
