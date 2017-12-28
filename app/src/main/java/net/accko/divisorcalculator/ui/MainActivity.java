@@ -1,6 +1,7 @@
 package net.accko.divisorcalculator.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -18,6 +19,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -30,13 +32,20 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.reward.RewardItem;
+import com.google.android.gms.ads.reward.RewardedVideoAd;
+import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 
 import net.accko.divisorcalculator.R;
 import net.accko.divisorcalculator.util.PreferenceView;
 
-import java.util.ArrayList;
+import org.w3c.dom.Text;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, RewardedVideoAdListener {
 
     Toolbar toolbar;
     ImageButton tabHome, tabStar, searchBack, searchClear, searchButton;
@@ -48,7 +57,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     RelativeLayout calculatorLayout, settingsLayout;
     PreferenceView preferenceVersion, preferenceInfo, preferenceContact, preferenceOsp, preferenceDev, preferenceRemoveAds;
     InputMethodManager imm;
+    SharedPreferences divisor_sp;
+    SharedPreferences.Editor divisor_sp_ed;
 
+    int adsNumber;
     int isPosition = 1;
 
     boolean clearTrue = true;
@@ -56,11 +68,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private AdView mAdView;
     private InterstitialAd mInterstitialAd;
+    private RewardedVideoAd mRewardedVideoAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        divisor_sp = getSharedPreferences("divisor", MODE_PRIVATE);
+        divisor_sp_ed = divisor_sp.edit();
+
+        adsNumber = divisor_sp.getInt("adsNumberSp", 0);
 
         toolbar = findViewById(R.id.toolbar);
         toolbarText = toolbar.findViewById(R.id.toolbar_title);
@@ -80,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         tabAlpha(255, 100); //tabicon translucent
 
-        imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+        imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
 
         searchBar.addTextChangedListener(new TextWatcher() {
             @Override
@@ -118,10 +136,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 switch (actionId) {
                     case EditorInfo.IME_ACTION_SEARCH:
-                        if (mInterstitialAd.isLoaded()) {
+                        if (mInterstitialAd.isLoaded() && divisor_sp.getInt("adsNumberSp", 0) == 0) {
                             mInterstitialAd.show();
-                        } else {
-                            Log.d("TAG", "The interstitial wasn't loaded yet.");
                         } //Interstitial Ads
 
                         if (searchBar.getText().toString().equals("")) {
@@ -172,8 +188,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
-    void findAds(){
+    private void loadRewardedVideoAd() {
+        //mRewardedVideoAd.loadAd("ca-app-pub-3940256099942544/5224354917", new AdRequest.Builder().build());
+
+        mRewardedVideoAd.loadAd("ca-app-pub-3940256099942544/5224354917", new AdRequest.Builder().build());
+    }
+
+    void findAds() {
         adLayout = findViewById(R.id.adLayout);
+        if (divisor_sp.getInt("adsNumberSp", 0) != 0) {
+            adLayout.setVisibility(View.GONE);
+        }
         mAdView = findViewById(R.id.adView);
 
         mInterstitialAd = new InterstitialAd(this);
@@ -183,6 +208,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         MobileAds.initialize(this, "ca-app-pub-8184195003057423/2039076197");
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest); //banner
+
+        mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
+        mRewardedVideoAd.setRewardedVideoAdListener(this); //reward
+        loadRewardedVideoAd();
     }
 
     void findTab() {
@@ -262,7 +291,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         searchButton.setVisibility(View.VISIBLE);
         searchButton.startAnimation(fadein);
 
-        imm.hideSoftInputFromWindow(searchBar.getWindowToken(),0); //keyboard hide
+        imm.hideSoftInputFromWindow(searchBar.getWindowToken(), 0); //keyboard hide
 
         if (tutorial == true) {
             tutorialLayout.setVisibility(View.VISIBLE);
@@ -302,6 +331,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     isPosition = 1;
                 }
                 break;
+
             case R.id.tabStar:
                 if (isPosition == 1) {
                     tabView(false, true);
@@ -310,18 +340,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     isPosition = 2;
                 }
                 break;
+
             case R.id.searchButton:
                 searchMode();
                 break;
+
             case R.id.searchBack:
                 searchReturn();
                 break;
+
             case R.id.searchClear:
                 searchBar.setText("");
                 break;
+
             case R.id.preferenceVersion:
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=net.accko.divisorcalculator")));
                 break;
+
             case R.id.preferenceInfo:
                 LayoutInflater titleInflater = getLayoutInflater();
                 final View viewTitle = titleInflater.inflate(R.layout.dialog_title, null);
@@ -337,22 +372,67 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 AlertDialog infoDialog = infoBuider.create();
                 infoDialog.show();
                 break;
+
             case R.id.preferenceContact:
                 startActivity(new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:me@accko.net")));
                 break;
+
             case R.id.preferenceOsp:
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/accko199806/divisorcalculator-android")));
                 break;
+
             case R.id.preferenceDev:
                 LayoutInflater titleInflater2 = getLayoutInflater();
                 final View viewTitle2 = titleInflater2.inflate(R.layout.dialog_title, null);
                 ImageView titleImage = viewTitle2.findViewById(R.id.titleImage);
-                titleImage.setImageResource(R.drawable.ic_remove_black_24dp);
+                titleImage.setImageResource(R.drawable.ic_person_black_24dp);
                 TextView dialogTitleText2 = viewTitle2.findViewById(R.id.title);
-                dialogTitleText2.setText(getString(R.string.remove_ads));
+                dialogTitleText2.setText(getString(R.string.developer));
 
                 LayoutInflater devInflater = getLayoutInflater();
-                final View viewDev = devInflater.inflate(R.layout.dialog_removeads, null);
+                final View viewDev = devInflater.inflate(R.layout.dialog_dev, null);
+                TextView textDev = viewDev.findViewById(R.id.textDev);
+                TextView blog = viewDev.findViewById(R.id.blog);
+                blog.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://blog.accko.net")));
+                    }
+                });
+                TextView googleplus = viewDev.findViewById(R.id.googleplus);
+                googleplus.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://plus.google.com/+학이")));
+                    }
+                });
+                TextView twitter = viewDev.findViewById(R.id.twitter);
+                twitter.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/accko199806")));
+                    }
+                });
+                TextView github = viewDev.findViewById(R.id.github); //view find
+                github.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/accko199806")));
+                    }
+                });
+
+                long now = System.currentTimeMillis(); //now time
+                Date date = new Date(now); //new date
+                SimpleDateFormat shiftNow = new SimpleDateFormat("yyyy");
+                String getTimeStr = shiftNow.format(date); //change form
+                int getTime = Integer.parseInt(getTimeStr); //set time string to int
+                String myInfo;
+                if (getTime >= 2019) {
+                    myInfo = getString(R.string.developer_text_age_after);
+                } else {
+                    myInfo = getString(R.string.developer_text_age);
+                }
+                textDev.setText(myInfo + "\n" + getString(R.string.developer_text_dev) + "\n" + getString(R.string.developer_text_more));
 
                 AlertDialog.Builder deleteAdsBuider = new AlertDialog.Builder(this);
                 deleteAdsBuider.setCustomTitle(viewTitle2);
@@ -360,6 +440,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 AlertDialog deleteAdsDialog = deleteAdsBuider.create();
                 deleteAdsDialog.show();
                 break;
+
             case R.id.preferenceRemoveAds:
                 LayoutInflater titleInflater3 = getLayoutInflater();
                 final View viewTitle3 = titleInflater3.inflate(R.layout.dialog_title, null);
@@ -370,13 +451,78 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 LayoutInflater removeAdsInflater = getLayoutInflater();
                 final View viewRemoveAds = removeAdsInflater.inflate(R.layout.dialog_removeads, null);
+                TextView numberAds = viewRemoveAds.findViewById(R.id.numberAds);
+                numberAds.setText(getString(R.string.number_ads) + " " + String.valueOf(divisor_sp.getInt("adsNumberSp", 0)));
+                Button takeAds = viewRemoveAds.findViewById(R.id.takeAds);
 
                 AlertDialog.Builder removeAdsBuider = new AlertDialog.Builder(this);
                 removeAdsBuider.setCustomTitle(viewTitle3);
                 removeAdsBuider.setView(viewRemoveAds);
-                AlertDialog removeAdsDialog = removeAdsBuider.create();
+                final AlertDialog removeAdsDialog = removeAdsBuider.create();
                 removeAdsDialog.show();
+
+                takeAds.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (mRewardedVideoAd.isLoaded()) {
+                            mRewardedVideoAd.show();
+                            removeAdsDialog.dismiss();
+                        }
+                    }
+                });
                 break;
         }
+    }
+
+    @Override
+    public void onResume() {
+        mRewardedVideoAd.resume(this);
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        mRewardedVideoAd.pause(this);
+        super.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        mRewardedVideoAd.destroy(this);
+        super.onDestroy();
+    }
+
+    public void onRewarded(RewardItem reward) { // Reward the user.
+        if (divisor_sp.getInt("adsNumberSp", 0) == 0) {
+            Toast.makeText(getApplicationContext(), getString(R.string.removed_text), Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getApplicationContext(), getString(R.string.ads_participation), Toast.LENGTH_LONG).show();
+        }
+        adsNumber++;
+        divisor_sp_ed.putInt("adsNumberSp", adsNumber);
+        divisor_sp_ed.apply();
+    }
+
+    public void onRewardedVideoAdLeftApplication() {
+    }
+
+    public void onRewardedVideoAdClosed() {
+    }
+
+    public void onRewardedVideoAdFailedToLoad(int errorCode) {
+        Toast.makeText(getApplicationContext(), getString(R.string.ads_load_fail), Toast.LENGTH_SHORT).show();
+    }
+
+    public void onRewardedVideoAdLoaded() {
+    }
+
+    public void onRewardedVideoAdOpened() {
+    }
+
+    public void onRewardedVideoStarted() {
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
     }
 }

@@ -6,14 +6,27 @@
 
     <string name="app_ver">Application Version</string>
     <string name="app_info">Application Information</string>
-    <string name="app_info_text">The &quot;Divisor Calculator&quot; application project is a project of &quot;akoiapp&quot; and has all rights.\nAll content and features are protected by the copyrighted work of akoiapp and may be legally punished for unauthorized distribution and modification.\n\nCopyright 2017. akoiapp. All rights reserved.</string>
+    <string name="app_info_text">The &quot;Divisor Calculator&quot; application project is a project of &quot;akoiapp&quot; and has all rights.\nAll content and features are protected by the copyrighted work of akoiapp and may be legally punished for unauthorized distribution and modification.\n\nCopyright 2017 akoiapp. All rights reserved.</string>
 
     <string name="contact">Contact</string>
 
     <string name="developer">Developer</string>
+    <string name="developer_text_age">안녕하세요! 저는 00년생 고등학생이며, akoiapp에서 안드로이드 개발을 하는 accko라고 합니다.</string>
+    <string name="developer_text_age_after">안녕하세요! 저는 00년생 고등학생이며, akoiapp에서 안드로이드 개발을 하는 accko라고 합니다.</string>
+    <string name="developer_text_dev">2014년부터 지금까지 약수계산기를 만들고, 업데이트 하고 있습니다.</string>
+    <string name="developer_text_more">더 자세한 내용은 아래의 사이트들을 참고해주세요!</string>
+
+    <string name="blog"><u>Blog</u></string>
+    <string name="googleplus"><u>Google+</u></string>
+    <string name="twitter"><u>Twitter</u></string>
+    <string name="github"><u>Github</u></string>
 
     <string name="remove_ads">Remove Ads</string>
     <string name="number_ads">Number of ads engagement : </string>
+    <string name="removed_text">It will be reflected after restarting the application!</string>
+
+    <string name="ads_participation">Thank you for your participation.</string>
+    <string name="ads_load_fail">Failed to load ads.</string>
 
     <string name="result"></string>
 

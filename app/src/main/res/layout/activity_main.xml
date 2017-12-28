@@ -67,7 +67,7 @@
                 android:id="@+id/calculatorLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_above="@+id/adView">
+                android:layout_above="@+id/adLayout">
 
                 <RelativeLayout
                     android:id="@+id/searchLayout"

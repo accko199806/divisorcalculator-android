@@ -3,23 +3,29 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
-    android:padding="24dp">
+    android:paddingBottom="24dp"
+    android:paddingLeft="24dp"
+    android:paddingRight="24dp"
+    android:paddingTop="16dp">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/numberAds"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/bmjua"
         android:gravity="center"
-        android:text="@string/number_ads" />
+        android:text="@string/number_ads"
+        android:textColor="@color/gray_text_color"
+        android:textSize="18sp" />
 
     <Button
+        android:id="@+id/takeAds"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/bmjua"
-        android:layout_below="@id/textView"
+        android:layout_below="@id/numberAds"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
+        android:fontFamily="@font/bmjua"
         android:text="@string/remove_ads" />
 
 </RelativeLayout>
