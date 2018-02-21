@@ -221,7 +221,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
         mRewardedVideoAd.setRewardedVideoAdListener(this);
-        mRewardedVideoAd.loadAd("ca-app-pub-3940256099942544/5224354917", new AdRequest.Builder().build()); //reward
+        mRewardedVideoAd.loadAd("ca-app-pub-8184195003057423/9628631175", new AdRequest.Builder().build()); //reward
     }
 
     void findTab() {
