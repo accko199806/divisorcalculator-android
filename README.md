@@ -41,8 +41,6 @@ TextUtils.join(", ", divisors)
 
 ## License
 ```
-Apache 2.0 License
-
 Copyright 2018 akoiapp
 
 Licensed under the Apache License, Version 2.0 (the "License");
