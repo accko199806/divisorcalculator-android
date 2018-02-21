@@ -1,5 +1,5 @@
 # divisorcalculator-android
-<img src="https://raw.githubusercontent.com/accko199806/divisorcalculator-android/master/Screenshot.png" width="700" height="628">
+![Screenshot](https://github.com/accko199806/divisorcalculator-android/blob/master/Screenshot.png?raw=true)
 
 `divisorcalculator-android` 프로젝트는 akoiapp에서 제작한 안드로이드 전용 약수 계산 애플리케이션입니다. 이 코드를 사용해 제작된 애플리케이션은 [여기](https://play.google.com/store/apps/details?id=net.accko.divisorcalculator)에서 확인하실 수 있습니다. 
 
@@ -37,4 +37,23 @@ divisors.add(Long.valueOf(num));
 계산된 결과를 출력하는 코드는 다음과 같습니다.
 ```java
 TextUtils.join(", ", divisors)
+```
+
+## License
+```
+Apache 2.0 License
+
+Copyright 2018 akoiapp
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 ```
