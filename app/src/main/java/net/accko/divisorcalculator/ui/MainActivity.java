@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     SharedPreferences.Editor divisor_sp_ed;
 
     int adsNumber;
+    int showdeleteads;
     int isPosition = 1;
 
     boolean clearTrue = true;
@@ -93,6 +94,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findMainview(); //find mainview, onclick
 
         tabAlpha(255, 100); //tabicon translucent
+
+        showdeleteads = 0;
 
         imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
 
@@ -132,8 +135,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 switch (actionId) {
                     case EditorInfo.IME_ACTION_SEARCH:
+                        if ((mInterstitialAd.isLoaded() && divisor_sp.getInt("adsNumberSp", 0) == 0) && (showdeleteads == 2)) {
+                            removeAds();
+                        }
+
                         if (mInterstitialAd.isLoaded() && divisor_sp.getInt("adsNumberSp", 0) == 0) {
                             mInterstitialAd.show();
+                            showdeleteads++;
                         } //Interstitial Ads
 
                         if (searchBar.getText().toString().equals("")) {
@@ -444,34 +452,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.preferenceRemoveAds:
-                LayoutInflater titleInflater3 = getLayoutInflater();
-                final View viewTitle3 = titleInflater3.inflate(R.layout.dialog_title, null);
-                ImageView titleImage2 = viewTitle3.findViewById(R.id.titleImage);
-                titleImage2.setImageResource(R.drawable.ic_remove_black_24dp);
-                TextView dialogTitleText3 = viewTitle3.findViewById(R.id.title);
-                dialogTitleText3.setText(getString(R.string.remove_ads));
-
-                LayoutInflater removeAdsInflater = getLayoutInflater();
-                final View viewRemoveAds = removeAdsInflater.inflate(R.layout.dialog_removeads, null);
-                TextView numberAds = viewRemoveAds.findViewById(R.id.numberAds);
-                numberAds.setText(getString(R.string.number_ads) + " " + String.valueOf(divisor_sp.getInt("adsNumberSp", 0)));
-                Button takeAds = viewRemoveAds.findViewById(R.id.takeAds);
-
-                AlertDialog.Builder removeAdsBuider = new AlertDialog.Builder(this);
-                removeAdsBuider.setCustomTitle(viewTitle3);
-                removeAdsBuider.setView(viewRemoveAds);
-                final AlertDialog removeAdsDialog = removeAdsBuider.create();
-                removeAdsDialog.show();
-
-                takeAds.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (mRewardedVideoAd.isLoaded()) {
-                            mRewardedVideoAd.show();
-                            removeAdsDialog.dismiss();
-                        }
-                    }
-                });
+                removeAds();
                 break;
         }
     }
@@ -526,5 +507,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
+    }
+
+    public void removeAds() {
+        LayoutInflater titleInflater3 = getLayoutInflater();
+        final View viewTitle3 = titleInflater3.inflate(R.layout.dialog_title, null);
+        ImageView titleImage2 = viewTitle3.findViewById(R.id.titleImage);
+        titleImage2.setImageResource(R.drawable.ic_remove_black_24dp);
+        TextView dialogTitleText3 = viewTitle3.findViewById(R.id.title);
+        dialogTitleText3.setText(getString(R.string.remove_ads));
+
+        LayoutInflater removeAdsInflater = getLayoutInflater();
+        final View viewRemoveAds = removeAdsInflater.inflate(R.layout.dialog_removeads, null);
+        TextView numberAds = viewRemoveAds.findViewById(R.id.numberAds);
+        numberAds.setText(getString(R.string.number_ads) + " " + String.valueOf(divisor_sp.getInt("adsNumberSp", 0)));
+        Button takeAds = viewRemoveAds.findViewById(R.id.takeAds);
+
+        AlertDialog.Builder removeAdsBuider = new AlertDialog.Builder(this);
+        removeAdsBuider.setCustomTitle(viewTitle3);
+        removeAdsBuider.setView(viewRemoveAds);
+        final AlertDialog removeAdsDialog = removeAdsBuider.create();
+        removeAdsDialog.show();
+
+        takeAds.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mRewardedVideoAd.isLoaded()) {
+                    mRewardedVideoAd.show();
+                    removeAdsDialog.dismiss();
+                }
+            }
+        });
     }
 }
