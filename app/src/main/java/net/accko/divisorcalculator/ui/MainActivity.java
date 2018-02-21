@@ -137,9 +137,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         } //Interstitial Ads
 
                         if (searchBar.getText().toString().equals("")) {
-                            Toast.makeText(MainActivity.this.getApplicationContext(), "cannot", Toast.LENGTH_SHORT).show(); //if edittext if blank
+                            Toast.makeText(MainActivity.this.getApplicationContext(), "cannot", Toast.LENGTH_SHORT).show(); //if edittext is blank
                         } else if (searchBar.getText().toString().startsWith("0")) {
                             Toast.makeText(MainActivity.this.getApplicationContext(), "cannot", Toast.LENGTH_SHORT).show(); //if edittext start number is 0
+                        } else if (searchBar.getText().toString().equals("1")) { //if edittext text is 1
+                            tutorialLayout.setVisibility(View.GONE);
+                            if (tutorial == true) {
+                                tutorialLayout.setAnimation(fadeout);
+                            }
+                            tutorial = false;
+
+                            result.setText("\n1");
+                            result.startAnimation(fadein);
+                            searchReturn();
+
+                            searchResult.setText("1" + " / " + "1" + getString(R.string.result));
                         } else {
                             tutorialLayout.setVisibility(View.GONE);
                             if (tutorial == true) {
