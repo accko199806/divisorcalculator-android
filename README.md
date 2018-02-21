@@ -1,5 +1,5 @@
 # divisorcalculator-android
-![Screenshot](https://github.com/accko199806/divisorcalculator-android/blob/master/Screenshot.png?raw=true)
+<img src="https://raw.githubusercontent.com/accko199806/divisorcalculator-android/master/Screenshot.png" width="700" height="628">
 
 `divisorcalculator-android` 프로젝트는 akoiapp에서 제작한 안드로이드 전용 약수 계산 애플리케이션입니다. 이 코드를 사용해 제작된 애플리케이션은 [여기](https://play.google.com/store/apps/details?id=net.accko.divisorcalculator)에서 확인하실 수 있습니다. 
 
