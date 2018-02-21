@@ -79,7 +79,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         toolbar = findViewById(R.id.toolbar);
         toolbarText = toolbar.findViewById(R.id.toolbar_title);
-
         setSupportActionBar(toolbar);
         toolbarText.setText(toolbar.getTitle());
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -202,7 +201,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
         mRewardedVideoAd.setRewardedVideoAdListener(this);
-        mRewardedVideoAd.loadAd("ca-app-pub-8184195003057423/9628631175", new AdRequest.Builder().build()); //reward
+        mRewardedVideoAd.loadAd("ca-app-pub-3940256099942544/5224354917", new AdRequest.Builder().build()); //reward
     }
 
     void findTab() {
@@ -318,7 +317,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (isPosition == 2) {
                     tabView(true, false);
                     tabAlpha(255, 100);
-
+                    imm.hideSoftInputFromWindow(searchBar.getWindowToken(), 0); //keyboard hide
                     isPosition = 1;
                 }
                 break;
@@ -327,7 +326,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (isPosition == 1) {
                     tabView(false, true);
                     tabAlpha(100, 255);
-
+                    imm.hideSoftInputFromWindow(searchBar.getWindowToken(), 0); //keyboard hide
                     isPosition = 2;
                 }
                 break;

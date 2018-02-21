@@ -207,7 +207,7 @@
                                 android:foreground="?android:attr/selectableItemBackground"
                                 app:name="@string/app_ver"
                                 app:symbol="@drawable/ic_question_black_24dp"
-                                app:text="4.0b" />
+                                app:text="4.2" />
 
                             <View
                                 android:layout_width="match_parent"
