@@ -12,7 +12,7 @@
 ## 핵심 코드
 앱에서는 `searchBar`라는 id를 가진 `EditText` 내에서 `IME_ACTION_SEARCH`함수를 호출하여 계산을 처리합니다.
 
-약수의 계산을 처리하는 코드는 다음과 같습니다.
+- 약수의 계산을 처리하는 코드는 다음과 같습니다.
 ```java
 ArrayList<Long> divisors = new ArrayList();
 String enteredNumber = searchBar.getText().toString();
@@ -41,7 +41,7 @@ while (length > 0) {
 divisors.add(Long.valueOf(num));
 ```
 
-계산된 결과를 출력하는 코드는 다음과 같습니다.
+- 계산된 결과를 출력하는 코드는 다음과 같습니다.
 ```java
 TextUtils.join(", ", divisors)
 ```
